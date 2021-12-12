@@ -1,11 +1,11 @@
 #include "Switch.h"
 
 Switch::Switch(){
-  Switch(-1) ;
+  Switch(-1);
 }
 
 Switch::Switch(int buttonPin){
-  this->buttonPin = buttonPin;  
+  this->buttonPin = buttonPin;
 }
 
 void Switch::init(){
@@ -15,7 +15,10 @@ void Switch::init(){
 
 void Switch::onStateChange(std::function<void()> action){
   if(getState()){
-    action();
+    if((millis() - t) > debounceDelay){
+      t = millis();
+      action(); 
+    }
   }
   updateState();
 }

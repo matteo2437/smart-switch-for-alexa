@@ -4,6 +4,8 @@ class Switch {
   private:
     int buttonPin;
     bool lastButtonState;
+    int debounceDelay = 200;
+    long t = 0;
 
   public:
     Switch();
